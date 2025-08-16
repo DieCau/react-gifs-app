@@ -4,6 +4,6 @@ import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <h1>Hello, World!</h1>
+    <h1>Hola Mundo</h1>
   </StrictMode>
 );
