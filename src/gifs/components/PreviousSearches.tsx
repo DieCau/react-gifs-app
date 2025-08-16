@@ -1,7 +1,12 @@
-export const PreviousSearches = () => {
+interface PreviousSearchesProps {
+  title: string;
+  list?: string;
+}
+
+export const PreviousSearches = ({ title }: PreviousSearchesProps) => {
   return (
     <div className='previous-searches'>
-      <h2>Búsquedas Anteriores</h2>
+      <h2>{title}</h2>
       <ul className='previous-searches-list'>
         <li>Goku</li>
         <li>Saitama</li>
