@@ -13,6 +13,10 @@ export const GifsApp = () => {
     console.log(term);
   };
 
+  const handleSearch = (query: string) => {
+    console.log({ query });
+  };
+
   return (
     <>
       {/* Header */}
@@ -20,14 +24,21 @@ export const GifsApp = () => {
         title={'Buscador de Gifs'}
         description={'Descubre y comparte el gif perfecto'}
       />
+
       {/* Search Bar */}
-      <SearchBar buttonText='Buscar' placeholder='Busca tu gif favorito...' />
+      <SearchBar
+        buttonText='Buscar'
+        placeholder='Busca tu gif favorito...'
+        onQuery={handleSearch}
+      />
+
       {/* Previous Searches */}
       <PreviousSearches
         title='Búsquedas Anteriores'
         searches={previousTerms}
         onLabelClicked={handleTermClicked}
       />
+
       {/* Gifs */}
       {/* "gifs" es la property y "mockGifs" son los datos enviados a través de esa props */}
       <GifList gifs={mockGifs} />
