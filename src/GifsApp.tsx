@@ -1,10 +1,18 @@
+import { useState } from 'react';
+
 import { PreviousSearches } from './gifs/components/PreviousSearches';
-import { SearchBar } from './shared/components/SearchBar';
-import { CustomHeader } from './shared/components/CustomHeader';
 import { GifList } from './gifs/components/GifList';
 import { mockGifs } from './mock-data/gifs.mock';
+import { SearchBar } from './shared/components/SearchBar';
+import { CustomHeader } from './shared/components/CustomHeader';
 
 export const GifsApp = () => {
+  const [previousTerms, setPreviousTerms] = useState(['dragon ball z']);
+
+  const handleTermClicked = (term: string) => {
+    console.log(term);
+  };
+
   return (
     <>
       {/* Header */}
@@ -17,7 +25,8 @@ export const GifsApp = () => {
       {/* Previous Searches */}
       <PreviousSearches
         title='Búsquedas Anteriores'
-        searches={['Goku', 'Saitama', 'Elden Ring']}
+        searches={previousTerms}
+        onLabelClicked={handleTermClicked}
       />
       {/* Gifs */}
       {/* "gifs" es la property y "mockGifs" son los datos enviados a través de esa props */}
