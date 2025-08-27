@@ -13,7 +13,7 @@ export const SearchBar = ({
 }: SearchBarProps) => {
   const [query, setQuery] = useState('');
 
-  // Para hacer el Debounce...
+  // Debounce...
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       onQuery(query);
