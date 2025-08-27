@@ -6,6 +6,8 @@ import { mockGifs } from './mock-data/gifs.mock';
 import { SearchBar } from './shared/components/SearchBar';
 import { CustomHeader } from './shared/components/CustomHeader';
 
+import { getGifsByQuery } from './gifs/actions/get-gifs-by-query.action';
+
 export const GifsApp = () => {
   const [previousTerms, setPreviousTerms] = useState(['dragon ball z']);
 
@@ -13,7 +15,7 @@ export const GifsApp = () => {
     console.log(term);
   };
 
-  const handleSearch = (query: string = '') => {
+  const handleSearch = async (query: string = '') => {
     // Convertir el query a minúsculas y eliminar espacios en blanco
     query = query.trim().toLowerCase();
 
@@ -25,6 +27,11 @@ export const GifsApp = () => {
 
     // Actualizar previousTerms agregando el nuevo término al inicio y limitando a 7 elementos máximo, es decir no puede ser un arreglo de más de 8.
     setPreviousTerms([query, ...previousTerms].splice(0, 7));
+
+    // Aqui llamo la query a la API
+    const gifs = await getGifsByQuery(query);
+
+    console.log(gifs);
   };
 
   return (
