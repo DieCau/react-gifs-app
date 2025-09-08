@@ -2,14 +2,17 @@ import { useState } from 'react';
 
 import { PreviousSearches } from './gifs/components/PreviousSearches';
 import { GifList } from './gifs/components/GifList';
-import { mockGifs } from './mock-data/gifs.mock';
 import { SearchBar } from './shared/components/SearchBar';
 import { CustomHeader } from './shared/components/CustomHeader';
 
 import { getGifsByQuery } from './gifs/actions/get-gifs-by-query.action';
+import type { Gif } from './gifs/interfaces/gif.interface';
 
 export const GifsApp = () => {
-  const [previousTerms, setPreviousTerms] = useState(['dragon ball z']);
+
+  const [gifs, setGifs] = useState<Gif[]>([])
+
+  const [previousTerms, setPreviousTerms] = useState<string[]>([]);
 
   const handleTermClicked = (term: string) => {
     console.log(term);
@@ -31,7 +34,7 @@ export const GifsApp = () => {
     // Aqui llamo la query a la API
     const gifs = await getGifsByQuery(query);
 
-    console.log(gifs);
+    setGifs(gifs)
   };
 
   return (
@@ -57,8 +60,7 @@ export const GifsApp = () => {
       />
 
       {/* Gifs */}
-      {/* "gifs" es la property y "mockGifs" son los datos enviados a través de esa props */}
-      <GifList gifs={mockGifs} />
+      <GifList gifs={gifs} />
     </>
   );
 };
