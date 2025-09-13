@@ -8,9 +8,13 @@ export const useGifs = () => {
 
     const [previousTerms, setPreviousTerms] = useState<string[]>([]);
 
+
+    const gifsCache: Record<string, Gif[]> = {}
+
     const handleTermClicked = async (term: string) => {
-        const gifs = await getGifsByQuery(term);
-        setGifs(gifs)
+        if (gifsCache[term]) {
+            setGifs(gifsCache[term])
+        }
     };
 
     const handleSearch = async (query: string = '') => {
@@ -30,6 +34,8 @@ export const useGifs = () => {
         const gifs = await getGifsByQuery(query);
 
         setGifs(gifs)
+
+        gifsCache[query] = gifs;
     };
 
 
